@@ -24,12 +24,9 @@ The following MQ commands are required:
 1. a channel (IIB.SVRCONN) where the MCAUSER is set to '*NOACCESS'.
 2. some kind of authentication.  Here I have used a simplified mechanism based on an AddressMap CHLAUTH rule.
     - SET CHLAUTH('IIB.SVRCONN') TYPE(ADDRESSMAP) ADDRESS('192.168.122.211') USERSRC(MAP) MCAUSER('iib') ACTION(ADD)
-
-NOTE: you could force a userid and password to be specified on the MQOutput node by changing the CONNAUTH attribute of the queue manager or
-changing the CHLAUTH to require a password ( CHCKCLNT(REQUIRED) ).  If you did this then you would need to specify a security identity like this:
-    - mqsisetdbparms TEST -n mq::iibMqIdent -u test2 -p passw0rd
-        
-and then specifying iibMqIdent on the security identity field of the MQOutput node.
+    - NOTE: you could force a userid and password to be specified on the MQOutput node by changing the CONNAUTH attribute of the queue manager orchanging the CHLAUTH to require a password ( CHCKCLNT(REQUIRED) ).  If you did this then you would need to specify a security identity like this:
+        - mqsisetdbparms TEST -n mq::iibMqIdent -u test2 -p passw0rd
+        - and then specifying iibMqIdent on the security identity field of the MQOutput node.
 3. the group iibg needs access to the queue manager and the ability to set and use an alternate userid.  You might need double quotes around the 
 group name on Linux:
     - setmqaut -m TEST -t qmgr -g iibg -all
